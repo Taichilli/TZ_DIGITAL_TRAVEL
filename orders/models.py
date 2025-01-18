@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
@@ -20,6 +21,7 @@ class Order(models.Model):
         ('confirmed', 'Confirmed'),
         ('cancelled', 'Cancelled'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     order_id = models.AutoField(primary_key=True)
     customer_name = models.CharField(max_length=255)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
