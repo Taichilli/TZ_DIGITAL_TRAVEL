@@ -37,6 +37,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': 'orders.log',
+            'encoding': 'utf-8',
         },
     },
     'loggers': {
