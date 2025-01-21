@@ -1,12 +1,17 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from .models import Order, Product
 from .serializers import OrderSerializer, ProductSerializer
 from .signals import order_created, order_updated, order_deleted
 from rest_framework.permissions import IsAuthenticated
 from django.core.cache import cache
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+import logging
 
+logger = logging.getLogger(__name__)
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -48,6 +53,16 @@ class OrderViewSet(ModelViewSet):
                 pass
 
         return queryset
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('status',openapi.IN_QUERY,description="Фильтр по статусу",
+                type=openapi.TYPE_STRING),
+            openapi.Parameter('min_price', openapi.IN_QUERY, description="Минимальная цена",
+                type=openapi.TYPE_STRING),
+            openapi.Parameter('max_price', openapi.IN_QUERY, description="Максимальная цена",
+                type=openapi.TYPE_STRING),
+        ]
+    )
 
     def list(self, request, *args, **kwargs):
         # Уникальный ключ для кеша
@@ -60,21 +75,19 @@ class OrderViewSet(ModelViewSet):
             serializer = OrderSerializer(queryset, many=True)
             orders = serializer.data
             # сохраняем в кеш на 15 минут
-            # cache.set(cache_key, orders, timeout=60 * 15)
-            cache.delete(f"orders_list_{request.user.id}")
-            cache.delete("orders_list")# Если нужно удалить общий кеш
+            cache.set(cache_key, orders, timeout=60 * 15)
 
         return Response(orders)
 
     def perform_create(self, serializer):
         try:
             order = serializer.save()
-            print("order created: ", order) # Отладка
+            logger.info("order created: ", order) # Отладка
             # Отправляем сигнал
             order_created.send(sender=self.__class__, order=order)
             cache.delete(f"orders_list_{self.request.user.id}")
         except Exception as e:
-            print("Error during order creation:",e) # Отладка
+            logger.error("Error during order creation:",e) # Отладка
             raise e
 
     def perform_update(self, serializer):

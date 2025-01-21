@@ -17,7 +17,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['order_id', 'customer_name', 'status', 'total_price', 'products', 'product_details', 'deleted', 'user']
+        fields = ['id', 'customer_name', 'status', 'total_price', 'products', 'product_details', 'deleted', 'user']
 
     def create(self, validated_data):
         #Создание заказа с привязкой продуктов по их ID.
