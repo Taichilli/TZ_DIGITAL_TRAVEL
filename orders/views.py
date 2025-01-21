@@ -1,7 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from rest_framework.decorators import action
 from .models import Order, Product
 from .serializers import OrderSerializer, ProductSerializer
 from .signals import order_created, order_updated, order_deleted
@@ -82,22 +81,23 @@ class OrderViewSet(ModelViewSet):
     def perform_create(self, serializer):
         try:
             order = serializer.save()
-            logger.info("order created: ", order) # Отладка
+            logger.info(f"order created: {order.id} by user {self.request.user}, order") # Отладка
             # Отправляем сигнал
             order_created.send(sender=self.__class__, order=order)
             cache.delete(f"orders_list_{self.request.user.id}")
         except Exception as e:
-            logger.error("Error during order creation:",e) # Отладка
+            logger.error(f"Error during order creation:{e}") # Отладка
             raise e
 
     def perform_update(self, serializer):
         try:
             order = serializer.save()
-
+            logger.info(f"order updated: {order.id} by user {self.request.user}, order")
             # Отправляем сигнал
             order_updated.send(sender=self.__class__, order=order)
             cache.delete(f"orders_list_{self.request.user.id}")
         except Exception as e:
+            logger.error(f"Error during order update:{e}")
             raise e
 
     def destroy(self, request, *args, **kwargs):
@@ -105,7 +105,7 @@ class OrderViewSet(ModelViewSet):
 
         # Мягкое удаление заказа
         instance.soft_delete()
-
+        logger.info(f"order deleted: {instance.id} by user {self.request.user}")
         # Отправляем сигнал
         order_deleted.send(sender=self.__class__, order=instance)
 

@@ -32,12 +32,37 @@ ALLOWED_HOSTS = []
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': 'orders.log',
             'encoding': 'utf-8',
+            'formatter': 'verbose',
+        },
+        'metrics_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'metrics.log',
+            'encoding': 'utf-8',
+            'formatter': 'verbose',
+        },
+        'events_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'events.log',
+            'encoding': 'utf-8',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
@@ -46,8 +71,25 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'orders': {  # Логер для приложения Orders
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'metrics': {  # Логгер для метрик
+            'handlers': ['metrics_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'events': {  # Логгер для событий
+            'handlers': ['events_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
+
+
 
 
 
@@ -75,6 +117,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'orders.middleware.OrderMiddleware',
 ]
 
 ROOT_URLCONF = 'orders_project.urls'
