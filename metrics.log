@@ -1,0 +1,36 @@
+INFO 2025-01-22 10:01:01,426 middleware Path: /, Method: GET, Status Code: 404, Duration: 0.013s
+WARNING 2025-01-22 10:01:01,426 middleware Failed request: /
+INFO 2025-01-22 18:29:18,233 middleware Path: /api/orders/, Method: POST, Status Code: 201, Duration: 0.057s
+INFO 2025-01-22 18:29:18,233 middleware Successful request: /api/orders/
+INFO 2025-01-22 18:29:18,593 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.009s
+INFO 2025-01-22 18:29:18,594 middleware Successful request: /api/orders/
+INFO 2025-01-22 18:29:18,597 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.002s
+INFO 2025-01-22 18:29:18,597 middleware Successful request: /api/orders/
+INFO 2025-01-22 18:29:18,957 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.009s
+INFO 2025-01-22 18:29:18,957 middleware Successful request: /api/orders/
+INFO 2025-01-22 18:29:19,323 middleware Path: /api/orders/6/, Method: DELETE, Status Code: 204, Duration: 0.013s
+INFO 2025-01-22 18:29:19,323 middleware Successful request: /api/orders/6/
+INFO 2025-01-22 18:29:19,790 middleware Path: /api/orders/7/, Method: PUT, Status Code: 500, Duration: 0.118s
+WARNING 2025-01-22 18:29:19,791 middleware Failed request: /api/orders/7/
+INFO 2025-01-22 19:04:30,901 middleware Path: /api/orders/, Method: POST, Status Code: 500, Duration: 2.255s
+WARNING 2025-01-22 19:04:30,901 middleware Failed request: /api/orders/
+INFO 2025-01-22 19:04:33,325 middleware Path: /api/orders/, Method: GET, Status Code: 500, Duration: 2.038s
+WARNING 2025-01-22 19:04:33,325 middleware Failed request: /api/orders/
+INFO 2025-01-22 19:04:35,695 middleware Path: /api/orders/, Method: GET, Status Code: 500, Duration: 2.023s
+WARNING 2025-01-22 19:04:35,695 middleware Failed request: /api/orders/
+INFO 2025-01-22 19:04:38,090 middleware Path: /api/orders/6/, Method: DELETE, Status Code: 500, Duration: 2.045s
+WARNING 2025-01-22 19:04:38,090 middleware Failed request: /api/orders/6/
+INFO 2025-01-22 19:04:38,482 middleware Path: /api/orders/7/, Method: PUT, Status Code: 200, Duration: 0.040s
+INFO 2025-01-22 19:04:38,483 middleware Successful request: /api/orders/7/
+INFO 2025-01-22 19:13:38,699 middleware Path: /api/orders/, Method: POST, Status Code: 201, Duration: 0.027s
+INFO 2025-01-22 19:13:38,699 middleware Successful request: /api/orders/
+INFO 2025-01-22 19:13:39,063 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.007s
+INFO 2025-01-22 19:13:39,063 middleware Successful request: /api/orders/
+INFO 2025-01-22 19:13:39,066 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.003s
+INFO 2025-01-22 19:13:39,066 middleware Successful request: /api/orders/
+INFO 2025-01-22 19:13:39,425 middleware Path: /api/orders/, Method: GET, Status Code: 200, Duration: 0.008s
+INFO 2025-01-22 19:13:39,425 middleware Successful request: /api/orders/
+INFO 2025-01-22 19:13:39,787 middleware Path: /api/orders/6/, Method: DELETE, Status Code: 204, Duration: 0.010s
+INFO 2025-01-22 19:13:39,787 middleware Successful request: /api/orders/6/
+INFO 2025-01-22 19:13:40,173 middleware Path: /api/orders/7/, Method: PUT, Status Code: 200, Duration: 0.040s
+INFO 2025-01-22 19:13:40,173 middleware Successful request: /api/orders/7/

@@ -1,0 +1,8 @@
+INFO 2025-01-22 18:29:18,220 signals OrderCreated event sent: {'order_id': 2, 'status': 'pending', 'customer_name': 'New Customer', 'total_price': 100.0}
+INFO 2025-01-22 18:29:19,321 signals OrderDeleted event sent: {'order_id': 6, 'customer_name': 'Test Customer'}
+INFO 2025-01-22 19:04:28,708 signals OrderCreated event sent: {'order_id': 2, 'status': 'pending', 'customer_name': 'New Customer', 'total_price': 100.0}
+INFO 2025-01-22 19:04:36,055 signals OrderDeleted event sent: {'order_id': 6, 'customer_name': 'Test Customer'}
+INFO 2025-01-22 19:04:38,480 signals OrderUpdated event sent: {'order_id': 7, 'old_status': 'pending', 'new_status': 'confirmed', 'customer_name': 'Updated Customer', 'total_price': 50.0}
+INFO 2025-01-22 19:13:38,687 signals OrderCreated event sent: {'order_id': 2, 'status': 'pending', 'customer_name': 'New Customer', 'total_price': 100.0}
+INFO 2025-01-22 19:13:39,785 signals OrderDeleted event sent: {'order_id': 6, 'customer_name': 'Test Customer'}
+INFO 2025-01-22 19:13:40,171 signals OrderUpdated event sent: {'order_id': 7, 'old_status': 'pending', 'new_status': 'confirmed', 'customer_name': 'Updated Customer', 'total_price': 50.0}

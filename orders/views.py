@@ -91,11 +91,24 @@ class OrderViewSet(ModelViewSet):
 
     def perform_update(self, serializer):
         try:
-            order = serializer.save()
-            logger.info(f"order updated: {order.id} by user {self.request.user}, order")
-            # Отправляем сигнал
-            order_updated.send(sender=self.__class__, order=order)
-            cache.delete(f"orders_list_{self.request.user.id}")
+            instance = self.get_object()  # Получаем объект до обновления
+            old_status = instance.status  # Сохраняем старый статус
+
+            order = serializer.save()  # Обновляем объект
+            new_status = order.status  # Получаем новый статус
+
+            logger.info(
+                f"Order updated: {order.id} by user {self.request.user}, old_status: {old_status}, new_status: {new_status}")
+
+            # Отправляем сигнал с указанием старого и нового статуса
+            order_updated.send(
+                sender=self.__class__,
+                order=order,
+                old_status=old_status,
+                new_status=new_status
+            )
+
+            # Удаляем кэш после обновления
         except Exception as e:
             logger.error(f"Error during order update:{e}")
             raise e

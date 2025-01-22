@@ -32,7 +32,11 @@ def handle_order_updated(sender, order, old_status, new_status, **kwargs):
             "customer_name": order.customer_name,
             "total_price": float(order.total_price),
         }
+
+        # Отправляем событие брокеру
         send_event_to_broker("OrderUpdated", event_data)
+
+        # Логируем отправленное событие
         logger.info(f"OrderUpdated event sent: {event_data}")
     except Exception as e:
         logger.error(f"Error sending OrderUpdated event: {e}")

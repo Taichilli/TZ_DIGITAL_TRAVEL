@@ -1,4 +1,3 @@
-# middleware.py
 import logging
 from datetime import datetime
 
@@ -19,4 +18,10 @@ class MetricsMiddleware:
             f"Path: {request.path}, Method: {request.method}, "
             f"Status Code: {response.status_code}, Duration: {duration:.3f}s"
         )
+        # Сбор метрик (например, успешные и неуспешные запросы)
+        if response.status_code >= 400:
+            logger.warning(f"Failed request: {request.path}")
+        else:
+            logger.info(f"Successful request: {request.path}")
+
         return response
